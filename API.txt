@@ -1,0 +1,44 @@
+import './App';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+
+const apiData="https://randomuser.me/api"
+
+function App(){
+
+ const [name,setName]=useState();
+ const [email,setEmail]=useState();
+
+ useEffect(()=>{
+
+   async function getData(){
+
+    const response = await axios.get(apiData);
+
+    //console.log(response);
+
+    setName(response.data.name);
+
+    setEmail(response.data.email);
+
+  }getData();
+ },[])
+
+  return(
+    <div>
+      <center>
+        <div>
+          {
+           name.map((data,index)=>{
+            <h1 key={index}>{data.name} {data.email}</h1>
+           })
+           
+          }
+        </div>
+        
+      </center>
+    </div>
+  )
+}
+export default App;
+
